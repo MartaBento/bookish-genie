@@ -1,7 +1,5 @@
 import Image from "next/image"
 
-import { cn } from "@/lib/utils"
-
 type GenreArtworkProps = {
   name: string
   description: string

@@ -1,8 +1,9 @@
 "use client"
 
-import { literaryGenres } from "@/data/literaryGenres"
+import { stepDescriptions, stepTitles } from "@/data/wizardData"
 import useWizardState from "@/store/store"
 
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -12,13 +13,24 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-import GenreArtwork from "./genre-artwork"
 import FirstStep from "./steps/first-step"
 import SecondStep from "./steps/second-step"
 import ThirdStep from "./steps/third-step"
 
 function Wizard() {
-  const { currentStep } = useWizardState()
+  const { currentStep, incrementStep, decrementStep } = useWizardState()
+
+  const handleNextStep = () => {
+    incrementStep()
+  }
+
+  const handlePreviousStep = () => {
+    decrementStep()
+  }
+
+  const handleSubmit = () => {
+    console.log("submitted")
+  }
 
   const renderStepComponent = () => {
     switch (currentStep) {
@@ -36,27 +48,22 @@ function Wizard() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Genre Selection</CardTitle>
-        <CardDescription>
-          Choose from a variety of genres to find your perfect book. Explore
-          captivating worlds, thrilling mysteries, heartwarming romances, and
-          more. Select the genres that resonate with your reading preferences
-          and embark on a literary journey tailored just for you.
-        </CardDescription>
+        <CardTitle>{stepTitles[currentStep]}</CardTitle>
+        <CardDescription>{stepDescriptions[currentStep]}</CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-3 gap-4">
-          {literaryGenres.map((genre) => (
-            <GenreArtwork
-              name={genre.name}
-              description={genre.description}
-              cover={genre.cover}
-            />
-          ))}
-        </div>
-      </CardContent>
+      <CardContent>{renderStepComponent()}</CardContent>
       <CardFooter>
-        <p>Card Footer</p>
+        <div className="flex justify-stretch">
+          <Button disabled={currentStep === 1} onClick={handlePreviousStep}>
+            Previous Step
+          </Button>
+          <Button onClick={handleNextStep} disabled={currentStep === 3}>
+            Next step
+          </Button>
+          <Button onClick={handleSubmit} disabled={currentStep !== 3}>
+            Give me some recommendations! ✨
+          </Button>
+        </div>
       </CardFooter>
     </Card>
   )
