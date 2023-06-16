@@ -1,4 +1,7 @@
+"use client"
+
 import { literaryGenres } from "@/data/literaryGenres"
+import useWizardState from "@/store/store"
 
 import {
   Card,
@@ -10,8 +13,26 @@ import {
 } from "@/components/ui/card"
 
 import GenreArtwork from "./genre-artwork"
+import FirstStep from "./steps/first-step"
+import SecondStep from "./steps/second-step"
+import ThirdStep from "./steps/third-step"
 
 function Wizard() {
+  const { currentStep } = useWizardState()
+
+  const renderStepComponent = () => {
+    switch (currentStep) {
+      case 1:
+        return <FirstStep />
+      case 2:
+        return <SecondStep />
+      case 3:
+        return <ThirdStep />
+      default:
+        return <FirstStep />
+    }
+  }
+
   return (
     <Card>
       <CardHeader>
