@@ -13,6 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import LoadingSpinner from "../ui/loading-spinner";
 import FirstStep from "./steps/first-step";
 import SecondStep from "./steps/second-step";
 import ThirdStep from "./steps/third-step";
@@ -23,9 +24,10 @@ function Wizard() {
 
   const handleNextStep = () => {
     setLoading(true);
+    incrementStep();
+
     setTimeout(() => {
       setLoading(false);
-      incrementStep();
     }, 2000);
   };
 
@@ -56,32 +58,38 @@ function Wizard() {
         <CardTitle>{stepTitles[currentStep]}</CardTitle>
         <CardDescription>{stepDescriptions[currentStep]}</CardDescription>
       </CardHeader>
-      <CardContent>{renderStepComponent()}</CardContent>
-      <CardFooter>
-        <div className="mx-auto mt-6 flex space-x-6">
-          <Button
-            disabled={currentStep === 1}
-            onClick={handlePreviousStep}
-            aria-label="Go back to the previous step"
-          >
-            Go back
-          </Button>
-          {currentStep != 3 && (
-            <Button
-              onClick={handleNextStep}
-              disabled={currentStep === 3}
-              aria-label="Continue to the next step"
-            >
-              Continue
-            </Button>
-          )}
-          {currentStep === 3 && (
-            <Button onClick={handleSubmit} aria-label="Get recommendations">
-              Give me some recommendations! ✨
-            </Button>
-          )}
-        </div>
-      </CardFooter>
+      {isLoading && <LoadingSpinner />}
+      {!isLoading && (
+        <>
+          <CardContent>{renderStepComponent()}</CardContent>
+
+          <CardFooter>
+            <div className="mx-auto mt-6 flex space-x-6">
+              <Button
+                disabled={currentStep === 1}
+                onClick={handlePreviousStep}
+                aria-label="Go back to the previous step"
+              >
+                Go back
+              </Button>
+              {currentStep != 3 && (
+                <Button
+                  onClick={handleNextStep}
+                  disabled={currentStep === 3}
+                  aria-label="Continue to the next step"
+                >
+                  Continue
+                </Button>
+              )}
+              {currentStep === 3 && (
+                <Button onClick={handleSubmit} aria-label="Get recommendations">
+                  Give me some recommendations! ✨
+                </Button>
+              )}
+            </div>
+          </CardFooter>
+        </>
+      )}
     </Card>
   );
 }
