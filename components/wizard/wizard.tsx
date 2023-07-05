@@ -58,7 +58,11 @@ function Wizard() {
         <CardTitle>{stepTitles[currentStep]}</CardTitle>
         <CardDescription>{stepDescriptions[currentStep]}</CardDescription>
       </CardHeader>
-      {isLoading && <LoadingSpinner />}
+      {isLoading && (
+        <CardContent className="flex items-center justify-center">
+          <LoadingSpinner stepNumber={currentStep} />
+        </CardContent>
+      )}
       {!isLoading && (
         <>
           <CardContent>{renderStepComponent()}</CardContent>
