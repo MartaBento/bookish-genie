@@ -1,5 +1,5 @@
 function ThirdStep() {
-  return <div>Third Step</div>
+  return <div>Third Step</div>;
 }
 
-export default ThirdStep
+export default ThirdStep;

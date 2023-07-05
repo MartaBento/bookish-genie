@@ -1,4 +1,4 @@
-import Wizard from "@/components/wizard/wizard"
+import Wizard from "@/components/wizard/wizard";
 
 export default function IndexPage() {
   return (
@@ -19,5 +19,5 @@ export default function IndexPage() {
         <Wizard />
       </div>
     </section>
-  )
+  );
 }

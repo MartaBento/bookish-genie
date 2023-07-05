@@ -1,4 +1,4 @@
-export type SiteConfig = typeof siteConfig
+export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "BookishGenie ✨",
@@ -7,4 +7,4 @@ export const siteConfig = {
   links: {
     github: "https://github.com/MartaBento/bookish-genie",
   },
-}
+};

@@ -1,5 +1,5 @@
 function SecondStep() {
-  return <div>Second Step</div>
+  return <div>Second Step</div>;
 }
 
-export default SecondStep
+export default SecondStep;

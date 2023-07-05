@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { stepDescriptions, stepTitles } from "@/data/wizardData"
-import useWizardState from "@/store/store"
+import { stepDescriptions, stepTitles } from "@/data/wizardData";
+import useWizardState from "@/store/store";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -11,39 +11,44 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 
-import FirstStep from "./steps/first-step"
-import SecondStep from "./steps/second-step"
-import ThirdStep from "./steps/third-step"
+import FirstStep from "./steps/first-step";
+import SecondStep from "./steps/second-step";
+import ThirdStep from "./steps/third-step";
 
 function Wizard() {
-  const { currentStep, incrementStep, decrementStep } = useWizardState()
+  const { currentStep, incrementStep, decrementStep, isLoading, setLoading } =
+    useWizardState();
 
   const handleNextStep = () => {
-    incrementStep()
-  }
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      incrementStep();
+    }, 2000);
+  };
 
   const handlePreviousStep = () => {
-    decrementStep()
-  }
+    decrementStep();
+  };
 
   const handleSubmit = () => {
-    console.log("submitted")
-  }
+    console.log("submitted");
+  };
 
   const renderStepComponent = () => {
     switch (currentStep) {
       case 1:
-        return <FirstStep />
+        return <FirstStep />;
       case 2:
-        return <SecondStep />
+        return <SecondStep />;
       case 3:
-        return <ThirdStep />
+        return <ThirdStep />;
       default:
-        return <FirstStep />
+        return <FirstStep />;
     }
-  }
+  };
 
   return (
     <Card>
@@ -53,20 +58,32 @@ function Wizard() {
       </CardHeader>
       <CardContent>{renderStepComponent()}</CardContent>
       <CardFooter>
-        <div className="flex justify-stretch">
-          <Button disabled={currentStep === 1} onClick={handlePreviousStep}>
-            Previous Step
+        <div className="mx-auto mt-6 flex space-x-6">
+          <Button
+            disabled={currentStep === 1}
+            onClick={handlePreviousStep}
+            aria-label="Go back to the previous step"
+          >
+            Go back
           </Button>
-          <Button onClick={handleNextStep} disabled={currentStep === 3}>
-            Next step
-          </Button>
-          <Button onClick={handleSubmit} disabled={currentStep !== 3}>
-            Give me some recommendations! ✨
-          </Button>
+          {currentStep != 3 && (
+            <Button
+              onClick={handleNextStep}
+              disabled={currentStep === 3}
+              aria-label="Continue to the next step"
+            >
+              Continue
+            </Button>
+          )}
+          {currentStep === 3 && (
+            <Button onClick={handleSubmit} aria-label="Get recommendations">
+              Give me some recommendations! ✨
+            </Button>
+          )}
         </div>
       </CardFooter>
     </Card>
-  )
+  );
 }
 
-export default Wizard
+export default Wizard;

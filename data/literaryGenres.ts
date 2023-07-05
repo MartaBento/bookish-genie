@@ -53,4 +53,4 @@ export const literaryGenres: LiteraryGenre[] = [
     description: "Factual stories covering various subjects.",
     cover: "nonFiction.png",
   },
-]
+];
