@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import LoadingSpinner from "../ui/loading-spinner";
+import LoadingSpinner from "../loading-spinner";
 import FirstStep from "./steps/first-step";
 import SecondStep from "./steps/second-step";
 import ThirdStep from "./steps/third-step";
@@ -62,7 +62,6 @@ function Wizard() {
       {!isLoading && (
         <>
           <CardContent>{renderStepComponent()}</CardContent>
-
           <CardFooter>
             <div className="mx-auto mt-6 flex space-x-6">
               <Button

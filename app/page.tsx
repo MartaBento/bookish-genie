@@ -10,9 +10,9 @@ export default function IndexPage() {
           your trusted AI companion in the world of books. 📚
         </h1>
         <p className="max-w-[700px] text-lg text-muted-foreground">
-          Overwhelmed by the amount of books out there? Simply share your
-          reading preferences, and let BookishGenie work its magic, recommending
-          captivating books tailored to your taste. Start here! 👇🏻
+          Overwhelmed by the amount of books out there? Me too. Simply share
+          your reading preferences, and let BookishGenie ✨ do its magic,
+          recommending captivating books tailored to your taste. Start here! 👇🏻
         </p>
       </div>
       <div>

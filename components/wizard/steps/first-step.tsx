@@ -1,7 +1,3 @@
-// First Step: Ask the user to select their favorite genre or genres from a predefined list
-// Second Step: Ask the user to specify the mood or theme they are interested in, such as uplifting, suspenseful, romantic, or any other relevant options.
-// Third Step: Inquire about the user's preference for book length, such as short, medium, or long books.
-
 import { literaryGenres } from "@/data/literaryGenres";
 
 import GenreArtwork from "../genre-artwork";
