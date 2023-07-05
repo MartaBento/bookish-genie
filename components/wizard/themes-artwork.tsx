@@ -1,23 +1,16 @@
 import Image from "next/image";
 
-type GenreArtworkProps = {
+type ThemesArtworkProps = {
   name: string;
-  description: string;
   cover: string;
-  isSelected: boolean;
 };
 
-function GenreArtwork({
-  name,
-  description,
-  cover,
-  isSelected,
-}: GenreArtworkProps) {
+function ThemesArtwork({ name, cover }: ThemesArtworkProps) {
   return (
     <div className="space-y-1.5 text-sm">
       <div className="overflow-hidden">
         <Image
-          src={`/literaryGenres/${cover}`}
+          src={`/literaryThemes/${cover}`}
           alt={name}
           width={200}
           height={100}
@@ -25,9 +18,8 @@ function GenreArtwork({
         />
       </div>
       <p className="font-medium leading-none">{name}</p>
-      <p className="text-xs text-muted-foreground">{description}</p>
     </div>
   );
 }
 
-export default GenreArtwork;
+export default ThemesArtwork;

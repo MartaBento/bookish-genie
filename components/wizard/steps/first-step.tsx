@@ -10,6 +10,7 @@ function FirstStep() {
           name={genre.name}
           description={genre.description}
           cover={genre.cover}
+          isSelected
         />
       ))}
     </div>

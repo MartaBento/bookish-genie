@@ -68,13 +68,15 @@ function Wizard() {
           <CardContent>{renderStepComponent()}</CardContent>
           <CardFooter>
             <div className="mx-auto mt-6 flex space-x-6">
-              <Button
-                disabled={currentStep === 1}
-                onClick={handlePreviousStep}
-                aria-label="Go back to the previous step"
-              >
-                Go back
-              </Button>
+              {currentStep !== 1 && (
+                <Button
+                  disabled={currentStep === 1}
+                  onClick={handlePreviousStep}
+                  aria-label="Go back to the previous step"
+                >
+                  Go back
+                </Button>
+              )}
               {currentStep != 3 && (
                 <Button
                   onClick={handleNextStep}
