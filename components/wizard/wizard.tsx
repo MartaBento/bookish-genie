@@ -19,8 +19,15 @@ import SecondStep from "./steps/second-step";
 import ThirdStep from "./steps/third-step";
 
 function Wizard() {
-  const { currentStep, incrementStep, decrementStep, isLoading, setLoading } =
-    useWizardState();
+  const {
+    currentStep,
+    incrementStep,
+    decrementStep,
+    isLoading,
+    setLoading,
+    favoriteGenre,
+    setFavoriteGenre,
+  } = useWizardState();
 
   const handleNextStep = () => {
     setLoading(true);
@@ -42,13 +49,18 @@ function Wizard() {
   const renderStepComponent = () => {
     switch (currentStep) {
       case 1:
-        return <FirstStep />;
+        return (
+          <FirstStep
+            favoriteGenre={favoriteGenre}
+            onSelectGenre={setFavoriteGenre}
+          />
+        );
       case 2:
         return <SecondStep />;
       case 3:
         return <ThirdStep />;
       default:
-        return <FirstStep />;
+        return <FirstStep onSelectGenre={setFavoriteGenre} />;
     }
   };
 
