@@ -72,9 +72,7 @@ function Wizard() {
   };
 
   const isStep1Disabled = currentStep === 1 && !favoriteGenre;
-  const isStep1Enabled = currentStep === 1 && favoriteGenre;
   const isStep2Disabled = currentStep === 2 && !selectedMood;
-  const isStep2Enabled = currentStep === 2 && selectedMood;
 
   return (
     <Card>
