@@ -31,6 +31,8 @@ function Wizard() {
     setSelectedMood,
     bookLengthPreference,
     setBookLengthPreference,
+    fetchRecommendations,
+    error,
   } = useWizardState();
 
   const handleNextStep = () => {
@@ -47,7 +49,7 @@ function Wizard() {
   };
 
   const handleSubmit = () => {
-    console.log("submitted");
+    fetchRecommendations();
   };
 
   const renderStepComponent = () => {
@@ -129,6 +131,7 @@ function Wizard() {
                   Give me some recommendations! ✨
                 </Button>
               )}
+              {error && <p>Error: {error}</p>}
             </div>
           </CardFooter>
         </>

@@ -6,20 +6,26 @@ interface WizardState {
   selectedMood: string;
   bookLengthPreference: string;
   isLoading: boolean;
+  error: string;
+  recommendations: ChatChoice[];
   incrementStep: () => void;
   decrementStep: () => void;
   setFavoriteGenre: (genre: string) => void;
   setSelectedMood: (mood: string) => void;
   setBookLengthPreference: (preference: string) => void;
   setLoading: (isLoading: boolean) => void;
+  setError: (error: string) => void;
+  fetchRecommendations: () => Promise<void>;
 }
 
-const useWizardState = create<WizardState>((set) => ({
+const useWizardState = create<WizardState>((set, get) => ({
   currentStep: 1,
   favoriteGenre: "",
   selectedMood: "",
   bookLengthPreference: "",
   isLoading: false,
+  error: "",
+  recommendations: [],
   incrementStep: () => set((state) => ({ currentStep: state.currentStep + 1 })),
   decrementStep: () => set((state) => ({ currentStep: state.currentStep - 1 })),
   setFavoriteGenre: (genre) => set({ favoriteGenre: genre }),
@@ -27,6 +33,52 @@ const useWizardState = create<WizardState>((set) => ({
   setBookLengthPreference: (preference) =>
     set({ bookLengthPreference: preference }),
   setLoading: (loading) => set({ isLoading: loading }),
+  setError: (error) => set({ error }),
+  fetchRecommendations: async () => {
+    try {
+      set({ isLoading: true });
+
+      const { favoriteGenre, selectedMood, bookLengthPreference } = get();
+
+      const requestBody = {
+        model: "gpt-3.5-turbo",
+        messages: [
+          { role: "system", content: "You are a book recommendation AI." },
+          {
+            role: "user",
+            content: `Give me three book recommendations. My favorite genre is ${favoriteGenre}, and I'm searching for something ${selectedMood}. I prefer ${bookLengthPreference} books. Only give me the book title and the author.`,
+          },
+        ],
+      };
+
+      const response = await fetch(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer your_token_here",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch recommendations.");
+      }
+
+      const data = await response.json();
+
+      // Update the recommendations in the state
+      set({ isLoading: false, error: "", recommendations: data.choices });
+    } catch (error: Error | unknown) {
+      set({
+        isLoading: false,
+        error: error instanceof Error ? error.message : String(error),
+        recommendations: [],
+      });
+    }
+  },
 }));
 
 export default useWizardState;
