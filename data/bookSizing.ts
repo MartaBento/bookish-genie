@@ -1,17 +1,17 @@
 export const bookSizing: BookSizes[] = [
   {
     id: 1,
-    description: "short",
+    description: "Short",
     cover: "short.png",
   },
   {
     id: 2,
-    description: "medium",
+    description: "Medium",
     cover: "medium.png",
   },
   {
     id: 3,
-    description: "long",
+    description: "Long",
     cover: "long.png",
   },
 ];

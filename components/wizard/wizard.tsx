@@ -29,6 +29,8 @@ function Wizard() {
     setFavoriteGenre,
     selectedMood,
     setSelectedMood,
+    bookLengthPreference,
+    setBookLengthPreference,
   } = useWizardState();
 
   const handleNextStep = () => {
@@ -65,7 +67,12 @@ function Wizard() {
           />
         );
       case 3:
-        return <ThirdStep />;
+        return (
+          <ThirdStep
+            selectedBookLength={bookLengthPreference}
+            onSelectedLength={setBookLengthPreference}
+          />
+        );
       default:
         return <FirstStep onSelectGenre={setFavoriteGenre} />;
     }
@@ -117,7 +124,7 @@ function Wizard() {
                   Continue
                 </Button>
               )}
-              {currentStep === 3 && (
+              {currentStep === 3 && bookLengthPreference && (
                 <Button onClick={handleSubmit} aria-label="Get recommendations">
                   Give me some recommendations! ✨
                 </Button>
