@@ -1,14 +1,32 @@
 import Image from "next/image";
+import { CheckCircle2 } from "lucide-react";
 
 type ThemesArtworkProps = {
   name: string;
   cover: string;
-  isSelected: boolean;
+  selectedMood?: string;
+  onClickMoodCard: (mood: string) => void;
 };
 
-function ThemesArtwork({ name, cover, isSelected }: ThemesArtworkProps) {
+function ThemesArtwork({
+  name,
+  cover,
+  selectedMood,
+  onClickMoodCard,
+}: ThemesArtworkProps) {
+  const handleSelectMoodCard = () => {
+    if (selectedMood === name) {
+      onClickMoodCard("");
+    } else {
+      onClickMoodCard(name);
+    }
+  };
+
   return (
-    <div className="group relative block bg-black hover:cursor-pointer">
+    <div
+      className="group relative block bg-black hover:cursor-pointer"
+      onClick={handleSelectMoodCard}
+    >
       <Image
         src={`/literaryThemes/${cover}`}
         alt={name}
@@ -23,6 +41,13 @@ function ThemesArtwork({ name, cover, isSelected }: ThemesArtworkProps) {
           <div className="translate-y-8 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"></div>
         </div>
       </div>
+
+      {selectedMood === name && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-green-600/75 text-white">
+          <CheckCircle2 size={40} color="white" />
+          <p className="mt-2 text-sm font-semibold">Mood/theme selected!</p>
+        </div>
+      )}
     </div>
   );
 }

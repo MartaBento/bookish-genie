@@ -27,6 +27,8 @@ function Wizard() {
     setLoading,
     favoriteGenre,
     setFavoriteGenre,
+    selectedMood,
+    setSelectedMood,
   } = useWizardState();
 
   const handleNextStep = () => {
@@ -56,13 +58,23 @@ function Wizard() {
           />
         );
       case 2:
-        return <SecondStep />;
+        return (
+          <SecondStep
+            selectedMood={selectedMood}
+            onSelectedMood={setSelectedMood}
+          />
+        );
       case 3:
         return <ThirdStep />;
       default:
         return <FirstStep onSelectGenre={setFavoriteGenre} />;
     }
   };
+
+  const isStep1Disabled = currentStep === 1 && !favoriteGenre;
+  const isStep1Enabled = currentStep === 1 && favoriteGenre;
+  const isStep2Disabled = currentStep === 2 && !selectedMood;
+  const isStep2Enabled = currentStep === 2 && selectedMood;
 
   return (
     <Card>
@@ -89,10 +101,19 @@ function Wizard() {
                   Go back
                 </Button>
               )}
-              {currentStep != 3 && (
+              {currentStep === 1 && (
                 <Button
                   onClick={handleNextStep}
-                  disabled={currentStep === 3}
+                  disabled={isStep1Disabled}
+                  aria-label="Continue to the next step"
+                >
+                  Continue
+                </Button>
+              )}
+              {currentStep === 2 && (
+                <Button
+                  onClick={handleNextStep}
+                  disabled={isStep2Disabled}
                   aria-label="Continue to the next step"
                 >
                   Continue

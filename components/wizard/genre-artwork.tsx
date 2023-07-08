@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { CheckCircle2 } from "lucide-react";
 
 type GenreArtworkProps = {
   name: string;
@@ -16,14 +17,16 @@ function GenreArtwork({
   onClickGenreCard,
 }: GenreArtworkProps) {
   const handleSelectGenreCard = () => {
-    onClickGenreCard(name);
+    if (selectedGenre === name) {
+      onClickGenreCard("");
+    } else {
+      onClickGenreCard(name);
+    }
   };
 
   return (
     <div
-      className={`group relative block bg-black hover:cursor-pointer ${
-        selectedGenre === name ? "bg-blue-500" : ""
-      }`}
+      className="group relative block bg-black hover:cursor-pointer"
       onClick={handleSelectGenreCard}
     >
       <Image
@@ -42,6 +45,13 @@ function GenreArtwork({
           </div>
         </div>
       </div>
+
+      {selectedGenre === name && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-green-600/75 text-white">
+          <CheckCircle2 size={40} color="white" />
+          <p className="mt-2 text-sm font-semibold">Genre selected!</p>
+        </div>
+      )}
     </div>
   );
 }
