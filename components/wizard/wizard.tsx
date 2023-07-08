@@ -2,6 +2,7 @@
 
 import { stepDescriptions, stepTitles } from "@/data/wizardData";
 import useWizardState from "@/store/store";
+import { parseRecommendations } from "@/utils/parseRecommendations";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -32,6 +33,7 @@ function Wizard() {
     bookLengthPreference,
     setBookLengthPreference,
     fetchRecommendations,
+    recommendations,
     error,
   } = useWizardState();
 
