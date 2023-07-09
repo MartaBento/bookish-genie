@@ -15,9 +15,14 @@ import {
 } from "@/components/ui/card";
 
 import LoadingSpinner from "../loading-spinner";
+import RecommendationsArtwork from "../recommendations/recommendations-artwork";
 import FirstStep from "./steps/first-step";
 import SecondStep from "./steps/second-step";
 import ThirdStep from "./steps/third-step";
+
+interface StepComponents {
+  [key: number]: JSX.Element;
+}
 
 function Wizard() {
   const {
@@ -41,45 +46,54 @@ function Wizard() {
     setLoading(true);
     incrementStep();
 
+    currentStep === 4 ? fetchRecommendations() : null;
+
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
   };
 
   const handlePreviousStep = () => {
+    setLoading(true);
     decrementStep();
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   };
 
-  const handleSubmit = () => {
-    fetchRecommendations();
+  const stepComponents: StepComponents = {
+    1: (
+      <FirstStep
+        favoriteGenre={favoriteGenre}
+        onSelectGenre={setFavoriteGenre}
+      />
+    ),
+    2: (
+      <SecondStep
+        selectedMood={selectedMood}
+        onSelectedMood={setSelectedMood}
+      />
+    ),
+    3: (
+      <ThirdStep
+        selectedBookLength={bookLengthPreference}
+        onSelectedLength={setBookLengthPreference}
+      />
+    ),
+    4: (
+      <RecommendationsArtwork
+        recommendations={parseRecommendations(recommendations)}
+      />
+    ),
   };
 
   const renderStepComponent = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <FirstStep
-            favoriteGenre={favoriteGenre}
-            onSelectGenre={setFavoriteGenre}
-          />
-        );
-      case 2:
-        return (
-          <SecondStep
-            selectedMood={selectedMood}
-            onSelectedMood={setSelectedMood}
-          />
-        );
-      case 3:
-        return (
-          <ThirdStep
-            selectedBookLength={bookLengthPreference}
-            onSelectedLength={setBookLengthPreference}
-          />
-        );
-      default:
-        return <FirstStep onSelectGenre={setFavoriteGenre} />;
-    }
+    return (
+      stepComponents[currentStep] || (
+        <FirstStep onSelectGenre={setFavoriteGenre} />
+      )
+    );
   };
 
   const isStep1Disabled = currentStep === 1 && !favoriteGenre;
@@ -129,7 +143,10 @@ function Wizard() {
                 </Button>
               )}
               {currentStep === 3 && bookLengthPreference && (
-                <Button onClick={handleSubmit} aria-label="Get recommendations">
+                <Button
+                  onClick={handleNextStep}
+                  aria-label="Get recommendations"
+                >
                   Give me some recommendations! ✨
                 </Button>
               )}

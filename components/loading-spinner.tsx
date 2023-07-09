@@ -9,7 +9,7 @@ type LoadingTitleMap = {
 const loadingTitle: LoadingTitleMap = {
   2: "Starting to cook some recommendations...",
   3: "Only one step missing!",
-  4: "Finishing the last details & generating you're new book! ✨",
+  4: "Finishing the last details & generating your new book! ✨",
 };
 
 function LoadingSpinner({ stepNumber }: LoadingSpinnerPropsType) {
