@@ -30,7 +30,7 @@ function RecommendationsArtwork({
                   alt={book}
                   width={200}
                   height={300}
-                  className="rounded-lg hover:opacity-80"
+                  className="rounded-lg border-2 hover:opacity-80 hover:outline-dotted hover:outline-offset-2 hover:outline-teal-500 dark:hover:outline-indigo-950"
                 />
                 <section className="mt-4 text-center">
                   <h3 className="text-lg font-bold">{book}</h3>
@@ -39,7 +39,7 @@ function RecommendationsArtwork({
                 <div className="mt-4 text-center">
                   <Button
                     variant="secondary"
-                    className="border-2 hover:outline-dotted hover:outline-offset-2 hover:outline-indigo-950"
+                    className="border-2 hover:outline-dotted hover:outline-offset-2 hover:outline-teal-500 dark:hover:outline-indigo-950"
                     onClick={() =>
                       window.open(
                         `https://www.goodreads.com/search?q=${identifier}`,

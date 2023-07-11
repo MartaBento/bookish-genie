@@ -24,7 +24,7 @@ function BookSizes({
 
   return (
     <div
-      className="group relative block bg-black hover:cursor-pointer"
+      className="group relative block border-2 bg-black hover:cursor-pointer hover:outline-dotted hover:outline-offset-2 hover:outline-teal-500 dark:hover:outline-indigo-950"
       onClick={handleSelectBookLength}
     >
       <Image
@@ -45,7 +45,7 @@ function BookSizes({
       </div>
 
       {selectedLength === description && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-green-600/75 text-white">
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-teal-500/90 text-white dark:bg-indigo-950/90">
           <CheckCircle2 size={40} color="white" />
           <p className="mt-2 text-sm font-semibold">Length selected!</p>
         </div>
