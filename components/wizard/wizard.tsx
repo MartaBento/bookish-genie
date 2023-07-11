@@ -3,7 +3,6 @@
 import { stepDescriptions, stepTitles } from "@/data/wizardData";
 import useAPIRequestsState from "@/store/requestsStore";
 import useWizardState from "@/store/wizardStore";
-import { parseRecommendations } from "@/utils/parseRecommendations";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -40,30 +39,29 @@ function Wizard() {
 
   const {
     isLoading,
-    error,
     setLoading,
     fetchRecommendations,
+    fetchBookInformation,
     recommendations,
+    bookInformation,
   } = useAPIRequestsState();
 
   const handleNextStep = () => {
     setLoading(true);
+    const nextStep = currentStep + 1;
     incrementStep();
 
-    currentStep === 4 ? fetchRecommendations() : null;
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    if (nextStep === 4) {
+      fetchRecommendations();
+      fetchBookInformation();
+    }
+    setLoading(false);
   };
 
   const handlePreviousStep = () => {
     setLoading(true);
     decrementStep();
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    setLoading(false);
   };
 
   const stepComponents: StepComponents = {
@@ -87,7 +85,8 @@ function Wizard() {
     ),
     4: (
       <RecommendationsArtwork
-        recommendations={parseRecommendations(recommendations)}
+        recommendations={recommendations}
+        bookInformation={bookInformation}
       />
     ),
   };
@@ -154,7 +153,6 @@ function Wizard() {
                   Give me some recommendations! ✨
                 </Button>
               )}
-              {error && <p>Error: {error}</p>}
             </div>
           </CardFooter>
         </>

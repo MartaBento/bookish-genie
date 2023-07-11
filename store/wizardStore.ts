@@ -12,7 +12,7 @@ interface WizardState {
   setBookLengthPreference: (preference: string) => void;
 }
 
-const useWizardState = create<WizardState>((set, get) => ({
+const useWizardState = create<WizardState>((set) => ({
   currentStep: 1,
   favoriteGenre: "",
   selectedMood: "",

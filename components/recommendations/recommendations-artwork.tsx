@@ -1,19 +1,46 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import { BookVolume } from "@/types/bookInformationResponse";
+
 type RecommendationsArtworkProps = {
   recommendations: { book: string; author: string }[];
+  bookInformation: BookVolume[];
 };
 
 function RecommendationsArtwork({
   recommendations,
+  bookInformation,
 }: RecommendationsArtworkProps) {
-  // const goodreadsURL = `https://www.goodreads.com/search?q=${isbn}`;
-
   return (
-    <div>
-      {recommendations.map((recommendation) => (
-        <p key={recommendation.book}>
-          Book: {recommendation.book}, Author: {recommendation.author}
-        </p>
-      ))}
+    <div className="grid grid-cols-3 gap-8">
+      {recommendations.map((recommendation, index) => {
+        const bookDetail = bookInformation[index];
+
+        return (
+          <div key={recommendation.book} className="flex flex-col items-center">
+            <Image
+              src={bookDetail.volumeInfo.imageLinks.thumbnail}
+              alt={recommendation.book}
+              width={200}
+              height={300}
+              className="rounded-lg shadow-md"
+            />
+            <h3 className="mt-4 text-center">{recommendation.book}</h3>
+            <p className="text-center">{recommendation.author}</p>
+            <p className="text-center">
+              ISBN: {bookDetail.volumeInfo.industryIdentifiers[0].identifier}
+            </p>
+            <p className="text-center">
+              <Link
+                href={`https://www.goodreads.com/search?q=${bookDetail.volumeInfo.industryIdentifiers[0].identifier}`}
+              >
+                <a className="text-blue-500 underline">Goodreads Link</a>
+              </Link>
+            </p>
+          </div>
+        );
+      })}
     </div>
   );
 }
