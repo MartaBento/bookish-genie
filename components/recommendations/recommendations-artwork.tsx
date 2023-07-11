@@ -26,8 +26,10 @@ function RecommendationsArtwork({
               height={300}
               className="rounded-lg shadow-md"
             />
-            <h3 className="mt-4 text-center">{recommendation.book}</h3>
-            <p className="text-center">{recommendation.author}</p>
+            <div className="mt-4 text-center">
+              <h3 className="text-lg font-bold">{recommendation.book}</h3>
+              <p className="text-gray-500">{recommendation.author}</p>
+            </div>
             <p className="text-center">
               ISBN: {bookDetail.volumeInfo.industryIdentifiers[0].identifier}
             </p>
@@ -35,7 +37,7 @@ function RecommendationsArtwork({
               <Link
                 href={`https://www.goodreads.com/search?q=${bookDetail.volumeInfo.industryIdentifiers[0].identifier}`}
               >
-                <a className="text-blue-500 underline">Goodreads Link</a>
+                <p className="text-blue-500 underline">Goodreads</p>
               </Link>
             </p>
           </div>
