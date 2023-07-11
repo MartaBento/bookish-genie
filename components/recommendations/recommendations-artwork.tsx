@@ -5,6 +5,8 @@ type RecommendationsArtworkProps = {
 function RecommendationsArtwork({
   recommendations,
 }: RecommendationsArtworkProps) {
+  // const goodreadsURL = `https://www.goodreads.com/search?q=${isbn}`;
+
   return (
     <div>
       {recommendations.map((recommendation) => (

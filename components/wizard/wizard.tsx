@@ -1,7 +1,8 @@
 "use client";
 
 import { stepDescriptions, stepTitles } from "@/data/wizardData";
-import useWizardState from "@/store/store";
+import useAPIRequestsState from "@/store/requestsStore";
+import useWizardState from "@/store/wizardStore";
 import { parseRecommendations } from "@/utils/parseRecommendations";
 
 import { Button } from "@/components/ui/button";
@@ -29,18 +30,21 @@ function Wizard() {
     currentStep,
     incrementStep,
     decrementStep,
-    isLoading,
-    setLoading,
     favoriteGenre,
     setFavoriteGenre,
     selectedMood,
     setSelectedMood,
     bookLengthPreference,
     setBookLengthPreference,
+  } = useWizardState();
+
+  const {
+    isLoading,
+    error,
+    setLoading,
     fetchRecommendations,
     recommendations,
-    error,
-  } = useWizardState();
+  } = useAPIRequestsState();
 
   const handleNextStep = () => {
     setLoading(true);
