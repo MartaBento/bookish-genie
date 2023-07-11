@@ -30,12 +30,16 @@ function Wizard() {
     currentStep,
     incrementStep,
     decrementStep,
+    resetStep,
     favoriteGenre,
     setFavoriteGenre,
     selectedMood,
     setSelectedMood,
     bookLengthPreference,
     setBookLengthPreference,
+    resetSelectedMood,
+    resetFavoriteGenre,
+    resetBookLengthPreference,
   } = useWizardState();
 
   const {
@@ -61,7 +65,20 @@ function Wizard() {
 
   const handlePreviousStep = () => {
     setLoading(true);
+
     decrementStep();
+
+    setLoading(false);
+  };
+
+  const handleStartAgain = () => {
+    setLoading(true);
+
+    resetStep();
+    resetFavoriteGenre();
+    resetSelectedMood();
+    resetBookLengthPreference();
+
     setLoading(false);
   };
 
@@ -122,7 +139,7 @@ function Wizard() {
           <CardContent>{renderStepComponent()}</CardContent>
           <CardFooter>
             <div className="mx-auto mt-6 flex space-x-6">
-              {currentStep !== 1 && (
+              {currentStep !== 1 && currentStep !== 4 && (
                 <Button
                   disabled={currentStep === 1}
                   onClick={handlePreviousStep}
@@ -155,6 +172,11 @@ function Wizard() {
                   aria-label="Get recommendations"
                 >
                   Give me some recommendations! ✨
+                </Button>
+              )}
+              {currentStep === 4 && (
+                <Button onClick={handleStartAgain} aria-label="Start again">
+                  Start again 🎉
                 </Button>
               )}
             </div>

@@ -14,10 +14,7 @@ export default function IndexPage() {
         <p className="max-w-[700px] text-lg text-muted-foreground">
           Overwhelmed by the amount of books out there? Me too. Simply share
           your reading preferences, and let BookishGenie do its magic,
-          recommending captivating books tailored to your taste. Start here!{" "}
-          <span role="img" aria-label="Pointing finger down">
-            👇🏻
-          </span>
+          recommending captivating books tailored to your taste.
         </p>
       </div>
       <Wizard />

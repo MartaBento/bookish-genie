@@ -1,7 +1,18 @@
 function SiteFooter() {
   return (
     <div className="text-center text-xs text-gray-700">
-      <p>Made by Marta, with ❤️. 2023.</p>
+      <p>
+        Made by{" "}
+        <a
+          href="https://www.linkedin.com/in/marta-bento"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="tw-animate-pulse"
+        >
+          Marta
+        </a>
+        . Created in 2023.
+      </p>
       <p className="mx-12 my-4">
         Disclaimer: BookishGenie is an AI-powered book recommendation system
         generated using OpenAI&apos;s GPT-3.5 language model. The

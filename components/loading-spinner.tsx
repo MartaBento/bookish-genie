@@ -6,13 +6,13 @@ type LoadingTitleMap = {
   [key: number]: string;
 };
 
-const loadingTitle: LoadingTitleMap = {
-  2: "Starting to cook some recommendations...",
-  3: "Only one step missing!",
-  4: "Finishing the last details & generating your new book! ✨",
-};
-
 function LoadingSpinner({ stepNumber }: LoadingSpinnerPropsType) {
+  const loadingTitle: LoadingTitleMap = {
+    2: "Starting to cook some recommendations...",
+    3: "Only one step missing!",
+    4: "Finishing the last details & generating your new book! ✨",
+  };
+
   return (
     <div className="flex items-center justify-center">
       <div className="mb-4 flex flex-col items-center space-y-4">
