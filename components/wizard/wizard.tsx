@@ -3,6 +3,7 @@
 import { stepDescriptions, stepTitles } from "@/data/wizardData";
 import useAPIRequestsState from "@/store/requestsStore";
 import useWizardState from "@/store/wizardStore";
+import Conffetti from "react-confetti";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -84,10 +85,13 @@ function Wizard() {
       />
     ),
     4: (
-      <RecommendationsArtwork
-        recommendations={recommendations}
-        bookInformation={bookInformation}
-      />
+      <>
+        <Conffetti numberOfPieces={200} opacity={0.6} recycle={false} />
+        <RecommendationsArtwork
+          recommendations={recommendations}
+          bookInformation={bookInformation}
+        />
+      </>
     ),
   };
 

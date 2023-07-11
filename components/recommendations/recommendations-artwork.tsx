@@ -1,5 +1,4 @@
-import Image, { ImageProps } from "next/image";
-import Link from "next/link";
+import Image from "next/image";
 
 import { BookVolume } from "@/types/bookInformationResponse";
 
@@ -16,7 +15,6 @@ function RecommendationsArtwork({
 }: RecommendationsArtworkProps) {
   return (
     <div>
-      <h2 className="sr-only">Recommended Books</h2>
       <ul className="grid grid-cols-3 gap-8">
         {recommendations.map(({ book, author }, index) => {
           const bookDetail = bookInformation[index];
@@ -26,23 +24,22 @@ function RecommendationsArtwork({
 
           return (
             <li key={book}>
-              <article className="flex flex-col items-center">
-                <figure className="rounded-lg shadow-md">
-                  <Image src={thumbnail} alt={book} width={200} height={300} />
-                </figure>
+              <div className="flex flex-col items-center">
+                <Image
+                  src={thumbnail}
+                  alt={book}
+                  width={200}
+                  height={300}
+                  className="rounded-lg hover:opacity-80"
+                />
                 <section className="mt-4 text-center">
                   <h3 className="text-lg font-bold">{book}</h3>
                   <p className="text-gray-500">{author}</p>
                 </section>
-                <footer className="space-y-6 text-center">
-                  <p>
-                    <span className="text-gray-400" aria-label="ISBN">
-                      ISBN:
-                    </span>{" "}
-                    {identifier}
-                  </p>
+                <div className="mt-4 text-center">
                   <Button
                     variant="secondary"
+                    className="border-2 hover:outline-dotted hover:outline-offset-2 hover:outline-indigo-950"
                     onClick={() =>
                       window.open(
                         `https://www.goodreads.com/search?q=${identifier}`,
@@ -52,8 +49,8 @@ function RecommendationsArtwork({
                   >
                     View book details on Goodreads
                   </Button>
-                </footer>
-              </article>
+                </div>
+              </div>
             </li>
           );
         })}
