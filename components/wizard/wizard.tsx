@@ -60,18 +60,17 @@ function Wizard() {
       fetchRecommendations();
       fetchBookInformation();
     }
-    setLoading(false);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
 
   const handlePreviousStep = () => {
-    setLoading(true);
-
     decrementStep();
-
-    setLoading(false);
   };
 
-  const handleStartAgain = () => {
+  const handleResetWizard = () => {
     setLoading(true);
 
     resetStep();
@@ -79,7 +78,9 @@ function Wizard() {
     resetSelectedMood();
     resetBookLengthPreference();
 
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
 
   const stepComponents: StepComponents = {
@@ -175,7 +176,7 @@ function Wizard() {
                 </Button>
               )}
               {currentStep === 4 && (
-                <Button onClick={handleStartAgain} aria-label="Start again">
+                <Button onClick={handleResetWizard} aria-label="Start again">
                   Start again 🎉
                 </Button>
               )}
