@@ -1,5 +1,10 @@
 "use client";
 
+import { useEffect } from "react";
+import {
+  BOOK_REC_KEY,
+  RECOMMENDATIONS_KEY,
+} from "@/constants/localStorageKeys";
 import { stepDescriptions, stepTitles } from "@/data/wizardData";
 import useAPIRequestsState from "@/store/requestsStore";
 import useWizardState from "@/store/wizardStore";
@@ -32,6 +37,7 @@ function Wizard() {
     incrementStep,
     decrementStep,
     resetStep,
+    setFinalStep,
     favoriteGenre,
     setFavoriteGenre,
     selectedMood,
@@ -50,7 +56,22 @@ function Wizard() {
     fetchBookInformation,
     recommendations,
     bookInformation,
+    setBookInformation,
+    setRecommendations,
   } = useAPIRequestsState();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedRecommendations = localStorage.getItem(RECOMMENDATIONS_KEY);
+      const storedBookInformation = localStorage.getItem(BOOK_REC_KEY);
+
+      if (storedRecommendations && storedBookInformation) {
+        setFinalStep();
+        setRecommendations(JSON.parse(storedRecommendations));
+        setBookInformation(JSON.parse(storedBookInformation));
+      }
+    }
+  }, [setFinalStep, setRecommendations, setBookInformation]);
 
   const handleNextStep = () => {
     setLoading(true);
@@ -85,6 +106,9 @@ function Wizard() {
     resetSelectedMood();
     resetBookLengthPreference();
 
+    localStorage.removeItem(RECOMMENDATIONS_KEY);
+    localStorage.removeItem(BOOK_REC_KEY);
+
     setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -114,7 +138,9 @@ function Wizard() {
         {isLoading && <LoadingSpinner stepNumber={currentStep} />}
         {!isLoading && bookInformation && (
           <>
-            <Conffetti numberOfPieces={200} opacity={0.6} recycle={false} />
+            {!localStorage.getItem(RECOMMENDATIONS_KEY) && (
+              <Conffetti numberOfPieces={200} opacity={0.6} recycle={false} />
+            )}
             <RecommendationsArtwork
               recommendations={parseRecommendations(recommendations)}
               bookInformation={bookInformation}
