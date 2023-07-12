@@ -5,6 +5,17 @@
 
 Discover your next literary adventure with BookishGenie, your trusted AI companion in the world of books. 📚
 
+<div align="center">
+  <img src="public/desktop-preview.png" alt="BookishGenie Desktop Preview" width="500">
+  <p align="center">BookishGenie Desktop Preview</h1>
+</div>
+
+<div align="center">
+  <img src="public/mobile-preview.png" alt="BookishGenie Mobile Preview" width="500">
+  <p align="center">BookishGenie Mobile Preview</h1>
+</div>
+
+
 ## Project intro
 
 BookishGenie is a web application that aims to simplify the process of finding your next captivating book to read. With a few simple steps, you can share your reading preferences and let BookishGenie's AI recommendation engine do its magic, providing personalized book recommendations tailored to your taste.
