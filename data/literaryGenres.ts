@@ -1,3 +1,5 @@
+import { LiteraryGenre } from "@/types/genres";
+
 export const literaryGenres: LiteraryGenre[] = [
   {
     id: 1,

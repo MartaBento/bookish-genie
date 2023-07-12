@@ -1,4 +1,4 @@
-interface ChatCompletion {
+export interface ChatCompletion {
   id: string;
   object: string;
   created: number;
@@ -19,5 +19,3 @@ interface ChatChoice {
   };
   finish_reason: string;
 }
-
-export {};

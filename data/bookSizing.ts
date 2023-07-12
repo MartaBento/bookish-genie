@@ -1,3 +1,5 @@
+import { BookSizes } from "@/types/sizes";
+
 export const bookSizing: BookSizes[] = [
   {
     id: 1,

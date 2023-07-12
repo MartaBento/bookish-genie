@@ -1,3 +1,5 @@
+import { Themes } from "@/types/themes";
+
 export const literaryThemes: Themes[] = [
   {
     id: 1,
