@@ -1,4 +1,8 @@
-# BookishGenie
+<div align="center">
+  <img src="public/favicon-32x32.png" alt="BookishGenie Logo" width="32">
+  <h1 align="center">BookishGenie</h1>
+</div>
+
 Discover your next literary adventure with BookishGenie, your trusted AI companion in the world of books. 📚
 
 ## Project intro
