@@ -3,6 +3,7 @@
 import { stepDescriptions, stepTitles } from "@/data/wizardData";
 import useAPIRequestsState from "@/store/requestsStore";
 import useWizardState from "@/store/wizardStore";
+import { parseRecommendations } from "@/utils/parseRecommendations";
 import Conffetti from "react-confetti";
 
 import { Button } from "@/components/ui/button";
@@ -57,13 +58,19 @@ function Wizard() {
     incrementStep();
 
     if (nextStep === 4) {
-      fetchRecommendations();
-      fetchBookInformation();
-    }
+      (async () => {
+        await fetchRecommendations(
+          favoriteGenre,
+          selectedMood,
+          bookLengthPreference
+        );
+        await fetchBookInformation();
 
-    setTimeout(() => {
+        setLoading(false);
+      })();
+    } else {
       setLoading(false);
-    }, 2000);
+    }
   };
 
   const handlePreviousStep = () => {
@@ -104,11 +111,16 @@ function Wizard() {
     ),
     4: (
       <>
-        <Conffetti numberOfPieces={200} opacity={0.6} recycle={false} />
-        <RecommendationsArtwork
-          recommendations={recommendations}
-          bookInformation={bookInformation}
-        />
+        {isLoading && <LoadingSpinner stepNumber={currentStep} />}
+        {!isLoading && bookInformation && (
+          <>
+            <Conffetti numberOfPieces={200} opacity={0.6} recycle={false} />
+            <RecommendationsArtwork
+              recommendations={parseRecommendations(recommendations)}
+              bookInformation={bookInformation}
+            />
+          </>
+        )}
       </>
     ),
   };

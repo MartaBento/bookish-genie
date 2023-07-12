@@ -29,8 +29,8 @@ function RecommendationsArtwork({
                   src={thumbnail}
                   alt={book}
                   width={200}
-                  height={300}
-                  className="rounded-lg border-2 hover:opacity-80 hover:outline-dotted hover:outline-offset-2 hover:outline-teal-500 dark:hover:outline-indigo-950"
+                  height={100}
+                  className="h-72 w-auto rounded-lg border-2 object-cover hover:opacity-80 hover:outline-dotted hover:outline-offset-2 hover:outline-teal-500 dark:hover:outline-indigo-950"
                 />
                 <section className="mt-4 text-center">
                   <h3 className="text-lg font-bold">{book}</h3>
