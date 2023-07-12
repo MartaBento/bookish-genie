@@ -58,6 +58,8 @@ function Wizard() {
     bookInformation,
     setBookInformation,
     setRecommendations,
+    bookInformationError,
+    recommendationsError,
   } = useAPIRequestsState();
 
   useEffect(() => {
@@ -146,6 +148,7 @@ function Wizard() {
             <RecommendationsArtwork
               recommendations={parseRecommendations(recommendations)}
               bookInformation={bookInformation}
+              error={!!bookInformationError || !!recommendationsError}
             />
           </>
         )}
