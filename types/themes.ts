@@ -3,3 +3,5 @@ interface Themes {
   name: string;
   cover: string;
 }
+
+export {};

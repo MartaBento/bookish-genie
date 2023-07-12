@@ -19,3 +19,5 @@ interface ChatChoice {
   };
   finish_reason: string;
 }
+
+export {};

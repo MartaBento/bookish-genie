@@ -106,8 +106,10 @@ function Wizard() {
     resetSelectedMood();
     resetBookLengthPreference();
 
-    localStorage.removeItem(RECOMMENDATIONS_KEY);
-    localStorage.removeItem(BOOK_REC_KEY);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(RECOMMENDATIONS_KEY);
+      localStorage.removeItem(BOOK_REC_KEY);
+    }
 
     setTimeout(() => {
       setLoading(false);
@@ -136,7 +138,7 @@ function Wizard() {
     4: (
       <>
         {isLoading && <LoadingSpinner stepNumber={currentStep} />}
-        {!isLoading && bookInformation && (
+        {!isLoading && bookInformation && typeof window !== "undefined" && (
           <>
             {!localStorage.getItem(RECOMMENDATIONS_KEY) && (
               <Conffetti numberOfPieces={200} opacity={0.6} recycle={false} />

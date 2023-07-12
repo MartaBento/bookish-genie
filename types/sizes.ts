@@ -3,3 +3,5 @@ interface BookSizes {
   description: string;
   cover: string;
 }
+
+export {};
