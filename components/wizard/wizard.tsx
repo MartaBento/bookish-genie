@@ -118,6 +118,11 @@ function Wizard() {
     }, 2000);
   };
 
+  const shouldShowConfetti =
+    !localStorage.getItem(RECOMMENDATIONS_KEY) &&
+    !bookInformationError &&
+    !recommendationsError;
+
   const stepComponents: StepComponents = {
     1: (
       <FirstStep
@@ -142,7 +147,7 @@ function Wizard() {
         {isLoading && <LoadingSpinner stepNumber={currentStep} />}
         {!isLoading && bookInformation && typeof window !== "undefined" && (
           <>
-            {!localStorage.getItem(RECOMMENDATIONS_KEY) && (
+            {shouldShowConfetti && (
               <Conffetti numberOfPieces={200} opacity={0.6} recycle={false} />
             )}
             <RecommendationsArtwork
