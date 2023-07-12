@@ -15,7 +15,7 @@ function RecommendationsArtwork({
 }: RecommendationsArtworkProps) {
   return (
     <div>
-      <ul className="grid grid-cols-3 gap-8">
+      <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {recommendations.map(({ book, author }, index) => {
           const bookDetail = bookInformation[index];
           const thumbnail = bookDetail?.volumeInfo?.imageLinks?.thumbnail;
