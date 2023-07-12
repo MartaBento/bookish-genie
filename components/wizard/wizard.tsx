@@ -119,6 +119,7 @@ function Wizard() {
   };
 
   const shouldShowConfetti =
+    typeof window !== "undefined" &&
     !localStorage.getItem(RECOMMENDATIONS_KEY) &&
     !bookInformationError &&
     !recommendationsError;
