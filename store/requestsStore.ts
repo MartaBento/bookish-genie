@@ -6,6 +6,7 @@ import { parseRecommendations } from "@/utils/parseRecommendations";
 import { create } from "zustand";
 
 import { BookVolume } from "@/types/bookInformationResponse";
+import { ChatChoice } from "@/types/bookRecommendationResponse";
 
 interface APIRequestsState {
   isLoading: boolean;

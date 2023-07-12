@@ -11,7 +11,7 @@ export interface ChatCompletion {
   };
 }
 
-interface ChatChoice {
+export interface ChatChoice {
   index: number;
   message: {
     role: string;
