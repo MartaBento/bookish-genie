@@ -1,3 +1,5 @@
+import { ChatChoice } from "@/types/bookRecommendationResponse";
+
 export function parseRecommendations(
   choices: ChatChoice[]
 ): { book: string; author: string }[] {
