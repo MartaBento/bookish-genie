@@ -1,6 +1,6 @@
 function SiteFooter() {
   return (
-    <div className="text-center text-xs text-gray-700">
+    <div className="text-center text-xs text-gray-400">
       <p>
         Made by{" "}
         <a

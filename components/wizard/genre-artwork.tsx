@@ -24,10 +24,20 @@ function GenreArtwork({
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleSelectGenreCard();
+    }
+  };
+
   return (
     <div
       className="group relative block border-2 bg-black hover:cursor-pointer hover:outline-dotted hover:outline-offset-2 hover:outline-teal-500 dark:hover:outline-indigo-950"
       onClick={handleSelectGenreCard}
+      onKeyDown={(event) => handleKeyDown(event)}
+      role="button"
+      tabIndex={0}
     >
       <Image
         src={`/literaryGenres/${cover}`}
