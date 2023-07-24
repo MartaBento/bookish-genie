@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import { Metadata } from "next";
+import Head from "next/head";
 import { Analytics } from "@vercel/analytics/react";
 
 import { siteConfig } from "@/config/site";
@@ -34,7 +35,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <head />
+        <Head>
+          <meta
+            name="google-site-verification"
+            content="google33f28ca90ea5fba9.html"
+          />
+        </Head>
         <body
           className={cn(
             "min-h-screen bg-background font-sans antialiased",
