@@ -38,7 +38,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Head>
           <meta
             name="google-site-verification"
-            content="google33f28ca90ea5fba9.html"
+            content="bE7jzA9Gqg2XRKYgFu4PVZXJU27BnH0YYzJdB3LLRps"
           />
         </Head>
         <body
