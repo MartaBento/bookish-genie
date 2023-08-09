@@ -31,7 +31,7 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-const GTM_ID = "GTM-NFWHW7DL";
+const GTM_ID = "G-6W36PJP4NX";
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
