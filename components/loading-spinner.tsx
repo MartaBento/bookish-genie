@@ -10,7 +10,7 @@ function LoadingSpinner({ stepNumber }: LoadingSpinnerPropsType) {
   const loadingTitle: LoadingTitleMap = {
     2: "Starting to cook some recommendations...",
     3: "Only one step missing!",
-    4: "Finishing the last details & generating your new book! ✨",
+    4: "Finishing the last details & generating your new book(s)! ✨",
   };
 
   return (

@@ -1,8 +1,10 @@
+import { INTERNAL_API_MAPPING } from "@/constants/apiMapping";
 import {
   BOOK_REC_KEY,
   RECOMMENDATIONS_KEY,
 } from "@/constants/localStorageKeys";
 import { parseRecommendations } from "@/utils/parseRecommendations";
+import axios from "axios";
 import { create } from "zustand";
 
 import { BookVolume } from "@/types/bookInformationResponse";
@@ -68,26 +70,16 @@ const useAPIRequestsState = create<APIRequestsState>((set, get) => ({
           ],
         };
 
-        const apiKey = process.env.NEXT_PUBLIC_OPEN_AI_API_KEY;
-        const authorization = `Bearer ${apiKey}`;
-
-        const response = await fetch(
-          "https://api.openai.com/v1/chat/completions",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: authorization,
-            },
-            body: JSON.stringify(requestBody),
-          }
+        const response = await axios.post(
+          INTERNAL_API_MAPPING.postRecommendations,
+          requestBody
         );
 
-        if (!response.ok) {
+        if (!response.data) {
           throw new Error("Failed to fetch recommendations.");
         }
 
-        const data = await response.json();
+        const data = await response.data;
 
         set({ recommendations: data.choices });
         localStorage.setItem(RECOMMENDATIONS_KEY, JSON.stringify(data.choices));
@@ -110,24 +102,21 @@ const useAPIRequestsState = create<APIRequestsState>((set, get) => ({
       set({ isLoading: true });
 
       const { recommendations } = get();
-      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY;
 
       const parsedRecommendations = parseRecommendations(recommendations);
 
       const bookPromises = parsedRecommendations.map(async (recommendation) => {
         const { book, author } = recommendation;
 
-        const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(
-          book
-        )}+inauthor:${encodeURIComponent(author)}&key=${apiKey}`;
+        const url = `${INTERNAL_API_MAPPING.getBookDetails}?book=${book}&author=${author}`;
 
-        const response = await fetch(url);
+        const response = await axios.get(url);
 
-        if (!response.ok) {
+        if (!response.data) {
           throw new Error(`Failed to fetch book information for ${book}.`);
         }
 
-        const data = await response.json();
+        const data = await response.data;
 
         const { items } = data;
 
